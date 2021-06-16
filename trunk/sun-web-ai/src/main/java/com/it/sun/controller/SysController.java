@@ -90,7 +90,26 @@ public class SysController {
         }
 
         Long endTime = System.currentTimeMillis();
-        logger.info("| response time |  " + "接口:setConfig  " + "响应时间:" + (endTime - statrTime));
+        logger.info("| response time | " + "接口:setConfig  " + "响应时间:" + (endTime - statrTime));
         return resultJo.toJSONString();
     }
+
+    @ApiOperation(value = "word分词", notes = "word分词")
+    @RequestMapping(value = "/getWord", method = RequestMethod.GET)
+    public String getWord(HttpServletRequest request, HttpServletResponse response,
+                            @ApiParam(name = "Str", value = "Str", required = true) @RequestParam(required = true) String Str) {
+        Long statrTime = System.currentTimeMillis();
+
+        JSONObject resultJo = new JSONObject();
+        resultJo.put("msg", "OK");
+        resultJo.put("c", ErrorCode.SUCCESS.getStatus());
+
+        List<String> ws=sysConfigService.task(Str);
+        resultJo.put("v",StringUtils.join(ws,","));
+
+        Long endTime = System.currentTimeMillis();
+        logger.info("| response time | " + "接口:getWord  " + "响应时间:" + (endTime - statrTime));
+        return resultJo.toJSONString();
+    }
+
 }

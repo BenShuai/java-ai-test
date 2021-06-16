@@ -7,9 +7,12 @@ import com.it.sun.entity.SysConfig;
 import com.it.sun.entity.example.SysConfigExample;
 import com.it.sun.mapper.SysConfigMapper;
 import org.apache.commons.lang3.StringUtils;
+import org.apdplat.word.WordSegmenter;
+import org.apdplat.word.segmentation.Word;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 //获取系统配置的服务
@@ -85,6 +88,21 @@ public class SysConfigService {
         return sysConfigMapper.deleteByExample(example);
     }
 
+    public List<String> task(String str){
+        Long startTime=System.currentTimeMillis();
 
+        List<String> ws=new ArrayList<>();//结果
+
+        List<Word> wordsList = WordSegmenter.seg(str);
+        if(wordsList!=null && wordsList.size()>0){
+            for (Word w:wordsList){
+                ws.add(w.getText());
+            }
+        }
+
+        long stopTime = System.currentTimeMillis();
+        System.out.println((stopTime-startTime)*1d/1000d);
+        return ws;
+    }
 
 }

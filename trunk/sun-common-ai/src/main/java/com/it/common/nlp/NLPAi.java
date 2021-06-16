@@ -8,7 +8,10 @@ import java.util.List;
 
 public class NLPAi {
 
+
     public static void main(String[] args) {
+
+        System.out.println("执行了2222222");
 
         //SegmentationAlgorithm 的可选类型为：
         //正向最大匹配算法：MaximumMatching
@@ -25,12 +28,30 @@ public class NLPAi {
         //https://my.oschina.net/apdplat/blog/228619
 
 
-        List<Word> wordsList = WordSegmenter.seg("孙本,是创互地图应用级产品开发平台的作者");
-        System.out.println(wordsList);
 
+
+
+
+        task("我要拉屎");
+        task("我要撒尿");
+        task("我要吃饭");
+        task("我要吃冰激凌");
+        task("我饿了");
+
+
+
+
+    }
+
+    private static void task(String str){
         Long startTime=System.currentTimeMillis();
-        List<Word> wordsList2 = WordSegmenter.segWithStopWords("你是谁");
-        System.out.println(wordsList2);
+
+        List<Word> wordsList = WordSegmenter.seg(str);
+
+        for (Word w:wordsList){
+            System.out.println(w.getText());
+        }
+        System.out.println(wordsList);
 
         long stopTime = System.currentTimeMillis();
         System.out.println((stopTime-startTime)*1d/1000d);

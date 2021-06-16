@@ -44,6 +44,7 @@ public class FontImgAiTrain {
                 g2.setColor(Color.BLACK);//设置背景颜色
                 g2.drawString(str,2,16); //向图片上写字符串
                 ImageIO.write(bi,"JPEG",new FileOutputStream(Configs.creImgBasePath+str+".jpg"));//保存图片 JPEG表示保存格式
+                g2.dispose();
             }catch (Exception ee){
                 ee.printStackTrace();
             }
@@ -58,7 +59,7 @@ public class FontImgAiTrain {
      */
     public static void CnnImgToFeatureExtraction(){
         long startTime = System.currentTimeMillis();
-        BaseUtil.mkdirToPath(Configs.creImgBasePath);//根目录不存在就创建
+        BaseUtil.mkdirToPath(Configs.creClassifyFilePath);//根目录不存在就创建
         //汉字的 Unicode 编码范围   https://www.qqxiuzi.cn/zh/hanzi-unicode-bianma.php
         String start="4e00";//定义一个字符串变量为4e00
         String end="9fa5";//定义一个字符串变量为9fa5
@@ -82,7 +83,7 @@ public class FontImgAiTrain {
     }
 
     public static void main(String[] args) {
-//        CreFontImg();//创建文字图像
+        CreFontImg();//创建文字图像
         CnnImgToFeatureExtraction();//开始训练文字特征识别
     }
 }

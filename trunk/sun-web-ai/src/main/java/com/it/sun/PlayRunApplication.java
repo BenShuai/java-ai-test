@@ -22,10 +22,5 @@ public class PlayRunApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PlayRunApplication.class, args);
-
-		//从数据库读取任务调度并启动
-		try{Thread.sleep(10000L);}catch (Exception e){}//10秒后再启动Job
-		SysConfigService sysConfigService = GetService.getBean(SysConfigService.class);//获得spring容器中的SysConfigService对象
-		sysConfigService.startQuartzJob();//在这个方法中启动调度
 	}
 }
